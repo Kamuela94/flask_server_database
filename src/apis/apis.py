@@ -1,7 +1,7 @@
 from flask import Flask, request
 from sys import path
 from os import getcwd
-path.append(getcwd() + "/service/")
+path.append(getcwd() + "/service")
 import SchorrService
 import json
 
@@ -34,11 +34,11 @@ def add_header(response):
 def query_data():
 	dictionary = json.loads(request.get_json(force=True))
 	response = []
-	try{
+	try:
 		response = SchorrService().query_database(dictionary)
-	}except{
+	except:
 		response = []
-	}
+	
 	return response
 
 #Takes a JSON containg the table name and fields and adds them to the database as a new table
@@ -58,31 +58,31 @@ def query_data():
 #Takes a JSON containing a table name and field data and adds it to the database as a new row
 #Returns True if successful
 #Returns False if unsuccessful
-@app.route('/add_row', methods=['POST'])
-def add_row():
-	dictionary = json.loads(request.get_json(force=True))
-	response = False
-	try{
-		response = SchorrService().add_table(dictionary)
-	}except{
-		response = False
-	}
+#@app.route('/add_row', methods=['POST'])
+#def add_row():
+#	dictionary = json.loads(request.get_json(force=True))
+#	response = False
+#	try:
+#		response = SchorrService().add_table(dictionary)
+#	except:
+#		response = False
+	
 
-	return response
+#	return response
 
 #Takes a table rowID and a table name and deletes that row from that table
 #Returns True if successful
 #Returns False if unsuccessful
-@app.route('/delete_row', methods=['POST'])
-def delete_row():
-	dictionary = json.loads(request.get_json(force=True))
-	response = False
-	try{
-		response = SchorrService().delete_row(dictionary['tableName'], dictionary['rowId'])
-	}except{
-		response = False
-	}
-	return response
+#@app.route('/delete_row', methods=['POST'])
+#def delete_row():
+#	dictionary = json.loads(request.get_json(force=True))
+#	response = False
+#	try:
+#		response = SchorrService().delete_row(dictionary['tableName'], dictionary['rowId'])
+#	except:
+#		response = False
+#	
+#	return response
 
 #Takes a table name and deletes it from that database
 #Returns True if successful
@@ -103,13 +103,12 @@ def delete_row():
 #Returns False if unsuccessful
 @app.route('/get_headers')
 def get_headers():
-	dictionary = json.loads(request.get_json(force=True))
 	response = False
-	try{
-		response = SchorrService().delete_row(dictionary['tableName'])
-	}except{
+	try:
+		response = SchorrService().get_headers()
+	except:
 		response = False
-	}
+	
 	return response
 
 
