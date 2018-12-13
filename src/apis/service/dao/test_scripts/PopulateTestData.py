@@ -7,18 +7,18 @@ import mysql.connector
 
 mydb = mysql.connector.connect(
   host="localhost",
-  user="myusername",
-  passwd="mypassword",
+  user="root",
+  passwd="thedoggoeswoof",
   database="schorrdatabase"
 )
 
 mycursor = mydb.cursor()
-sql = "INSERT INTO schorrtable (name, address, state, company) VALUES (%s, %s)"
+sql = "INSERT INTO schorrtable (name, address, state, company) VALUES (%s, %s, %s, %s)"
 val = []
 
 with open('test_data', 'rb') as file:
 	for line in file:
-		words = line.split(' ')
+		words = line.split()
 		data_base_entry = []
 		for word in words:
 			if(len(data_base_entry) == 4):

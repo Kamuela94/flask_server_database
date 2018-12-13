@@ -2,13 +2,14 @@ import mysql.connector
 
 mydb = mysql.connector.connect(
   host="localhost",
-  user="myusername",
-  passwd="mypassword"
+  user="root",
+  passwd="thedoggoeswoof",
+  database="schorrdatabase"
 )
 
 mycursor = mydb.cursor()
 
-mycursor.execute("SHOW DATABASES")
+mycursor.execute("DESCRIBE schorrtable")
 
 for x in mycursor:
   print(x)
